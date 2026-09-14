@@ -1,0 +1,143 @@
+﻿@{
+    ViewData["Title"] = "Secure SSRF Protection";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1>Secure SSRF Protection</h1>
+
+        <p class="text-muted">
+            CyberTrace Secure SSRF Security Lab
+        </p>
+
+    </div>
+
+    <div class="alert alert-success shadow">
+
+        <h5>SSRF Protection</h5>
+
+        <p class="mb-0">
+            This version validates the URL and blocks access to
+            local and private network addresses before making
+            the HTTP request.
+        </p>
+
+    </div>
+
+    <div class="card border-success shadow mx-auto"
+         style="max-width: 800px;">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">
+                🟢 Secure URL Request
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            @if (ViewBag.Response != null)
+            {
+                <div class="alert alert-success">
+
+                    <strong>
+                        Response from allowed URL:
+                    </strong>
+
+                    <pre class="mt-3 mb-0">@ViewBag.Response</pre>
+
+                </div>
+            }
+
+            <form asp-controller="Ssrf"
+                  asp-action="Index"
+                  method="post">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Target URL
+                    </label>
+
+                    <input type="url"
+                           name="targetUrl"
+                           class="form-control"
+                           placeholder="https://example.com"
+                           required />
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success">
+
+                    Test Secure SSRF
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4 class="mb-0">
+                SSRF Security Test
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <h5>Blocked Internal Resource</h5>
+
+            <p>
+                The following URL should be blocked:
+            </p>
+
+            <code>
+                https://localhost:7191/Ssrf/InternalResource
+            </code>
+
+            <hr />
+
+            <h5>Security Rules</h5>
+
+            <ul>
+
+                <li>
+                    Only HTTPS URLs are accepted.
+                </li>
+
+                <li>
+                    Local addresses are blocked.
+                </li>
+
+                <li>
+                    Loopback addresses are blocked.
+                </li>
+
+                <li>
+                    Private network addresses are blocked.
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>

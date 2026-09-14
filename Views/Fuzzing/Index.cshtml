@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Secure Fuzzing";
+}
+
+<div class="container mt-5">
+
+    <h1>Secure Fuzzing Protection</h1>
+
+    <p>
+        This page validates user input before processing it.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.Success
+        </div>
+    }
+
+    @if (ViewBag.Input != null)
+    {
+        <div class="alert alert-info">
+            <strong>Accepted Input:</strong>
+            @ViewBag.Input
+            <br />
+            <strong>Length:</strong>
+            @ViewBag.Length
+        </div>
+    }
+
+    <form asp-controller="Fuzzing"
+          asp-action="Index"
+          method="post">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Enter Input
+            </label>
+
+            <input type="text"
+                   name="input"
+                   class="form-control"
+                   maxlength="50"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+            Validate Input
+        </button>
+
+    </form>
+
+    <div class="mt-4">
+        <h4>Security Rules</h4>
+
+        <ul>
+            <li>Maximum input length: 50 characters</li>
+            <li>Control characters are blocked</li>
+            <li>Obvious script content is blocked</li>
+            <li>Invalid input is rejected before processing</li>
+        </ul>
+    </div>
+
+</div>

@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Secure Dictionary Attack";
+}
+
+<div class="container mt-5">
+
+    <h1>Secure Dictionary Attack Protection</h1>
+
+    <p>
+        This login page is protected against repeated password guessing attempts.
+    </p>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.Error
+        </div>
+    }
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.Success
+        </div>
+    }
+
+    <form asp-controller="DictionaryAttack"
+          asp-action="Index"
+          method="post">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Username
+            </label>
+
+            <input type="text"
+                   name="username"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Password
+            </label>
+
+            <input type="password"
+                   name="password"
+                   class="form-control"
+                   required />
+
+        </div>
+
+        <button type="submit"
+                class="btn btn-success">
+            Login
+        </button>
+
+    </form>
+
+</div>

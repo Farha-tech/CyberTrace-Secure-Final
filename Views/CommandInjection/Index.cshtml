@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "Secure Command Execution";
+}
+
+<div class="container mt-5">
+
+    <div class="text-center mb-5">
+
+        <h1>Secure Command Execution</h1>
+
+        <p class="text-muted">
+            CyberTrace Secure Command Injection Lab
+        </p>
+
+    </div>
+
+    <div class="alert alert-success shadow">
+
+        <h5>Secure Command Execution</h5>
+
+        <p class="mb-0">
+            The application only allows predefined commands.
+            User input is checked against a server-side allowlist
+            before command execution.
+        </p>
+
+    </div>
+
+    <div class="card border-success shadow mx-auto"
+         style="max-width: 750px;">
+
+        <div class="card-header bg-success text-white">
+
+            <h4 class="mb-0">
+                🟢 Secure Command Execution
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            @if (ViewBag.Output != null)
+            {
+                <div class="alert alert-success">
+
+                    <strong>Command Output:</strong>
+
+                    <pre class="mt-3 mb-0">@ViewBag.Output</pre>
+
+                </div>
+            }
+
+            @if (ViewBag.ErrorOutput != null &&
+                 !string.IsNullOrWhiteSpace(ViewBag.ErrorOutput))
+            {
+                <div class="alert alert-warning">
+
+                    <strong>Command Error:</strong>
+
+                    <pre class="mt-3 mb-0">@ViewBag.ErrorOutput</pre>
+
+                </div>
+            }
+
+            <form asp-controller="CommandInjection"
+                  asp-action="Index"
+                  method="post">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Command
+                    </label>
+
+                    <input type="text"
+                           name="command"
+                           class="form-control"
+                           placeholder="Enter an approved command"
+                           required />
+
+                </div>
+
+                <button type="submit"
+                        class="btn btn-success">
+
+                    Execute Command
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow mt-4">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4 class="mb-0">
+                Allowed Commands
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <p>
+                The following commands are allowed:
+            </p>
+
+            <ul>
+
+                <li>
+                    <code>whoami</code>
+                </li>
+
+                <li>
+                    <code>hostname</code>
+                </li>
+
+                <li>
+                    <code>date</code>
+                </li>
+
+            </ul>
+
+            <hr />
+
+            <h5>Security Test</h5>
+
+            <p>
+                Any command that is not included in the approved
+                allowlist should be blocked.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
